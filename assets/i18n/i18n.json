@@ -1,0 +1,17 @@
+{
+    "app_title": {
+        "vi": "Check phong thủy"
+    },
+    "check": {
+        "vi": "Kiểm tra",
+        "en": "Check"
+    },
+    "do_not_leave_empty": {
+        "vi": "Không được để trống",
+        "en": "Do not leave this field empty"
+    },
+    "title": {
+        "vi": "Tiêu đề",
+        "en": "Title"
+    }
+}
