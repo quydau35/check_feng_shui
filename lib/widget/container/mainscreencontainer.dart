@@ -45,7 +45,8 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
 
   Future<String> calculateMaterial() async {
     if (_conNum.text.isNotEmpty) {
-      double key = await calculateSum(double.parse(_conNum.text));
+      double key =
+          await calculateSum(double.parse(_conNum.text.replaceAll(",", "")));
       debugPrint('element: ' + element.rank[key]['name']);
       setState(() {
         elementName = element.rank[key]['name'];
@@ -64,11 +65,12 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
       double tempSum = double.parse(
         tempString.split('').reduce(
           (value, element) {
-            double tempValue = double.parse(value) + double.parse(element);
-            value = tempValue.toString();
+            double tempValue = double.parse(value.replaceAll(",", "")) +
+                double.parse(element.replaceAll(",", ""));
+            value = tempValue.toString().replaceAll(",", "");
             return value;
           },
-        ),
+        ).replaceAll(",", ""),
       );
       return calculateSum(tempSum);
     }
