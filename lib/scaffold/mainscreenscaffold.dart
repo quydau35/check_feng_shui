@@ -8,7 +8,7 @@ class MainScreenScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Check'),
+        title: Text('Check phong thuỷ dãy số'),
       ),
       body: MainScreenContainer(),
     );
