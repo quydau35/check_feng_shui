@@ -2,7 +2,7 @@ import 'package:check_feng_shui/model/data.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenContainer extends StatefulWidget {
-  MainScreenContainer({Key key}) : super(key: key);
+  // MainScreenContainer({required Key key}) : super(key: key);
 
   @override
   _MainScreenContainerState createState() => _MainScreenContainerState();
@@ -10,14 +10,14 @@ class MainScreenContainer extends StatefulWidget {
 
 class _MainScreenContainerState extends State<MainScreenContainer> {
   final TextEditingController _conNum = TextEditingController();
-  String content;
-  String contentRank;
-  MaterialColor backgroundColor;
-  String elementName;
+  String content = '';
+  String contentRank = '';
+  MaterialColor? backgroundColor;
+  String elementName = '';
   final Meaning meaning = Meaning();
   final Ranking ranking = Ranking();
   final Elements element = Elements();
-  Future futureContent;
+  Future? futureContent;
 
   void calculateRank(String value) {
     String subString = _conNum.text.substring(
@@ -28,17 +28,17 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
     key = (key == 0) ? 80 : key;
     setState(() {
       if (_conNum.text.isNotEmpty) {
-        content = meaning.details[key]['detail'];
-        contentRank = ranking.rank[meaning.details[key]['rank']]['name'];
-        backgroundColor = ranking.rank[meaning.details[key]['rank']]['color'];
+        content = meaning.details[key]?['detail'];
+        contentRank = ranking.rank[meaning.details[key]?['rank']]?['name'];
+        backgroundColor = ranking.rank[meaning.details[key]?['rank']]?['color'];
         elementName = calculateMaterial();
         // calculateMaterial();
         debugPrint(backgroundColor.toString());
       } else {
         _conNum.clear();
         backgroundColor = null;
-        content = null;
-        contentRank = null;
+        content = '';
+        contentRank = '';
       }
     });
     debugPrint('content: ${content}');
@@ -52,11 +52,11 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
           _conNum.text.replaceAll(RegExp(r"\,|\."), ""),
         ),
       );
-      debugPrint('element: ' + element.rank[key]['name']);
+      debugPrint('element: ' + element.rank[key]?['name']);
       // setState(() {
       //   elementName = element.rank[key]['name'];
       // });
-      return element.rank[key]['name'];
+      return element.rank[key]?['name'];
     } else {
       return null;
     }
@@ -91,7 +91,7 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  if (value.isEmpty) {
+                  if (value!.isEmpty) {
                     return 'Không được để trống';
                   } else {
                     return null;
