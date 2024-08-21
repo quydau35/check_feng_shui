@@ -10,7 +10,7 @@ class Meaning {
     5: {
       'key': 5,
       'rank': 1,
-      'detail': 'Cộng việc làm ăn tiến tới và công danh ngày một tăng thêm',
+      'detail': 'Công việc làm ăn tiến tới và công danh ngày một tăng thêm',
     },
     16: {
       'key': 16,
@@ -425,7 +425,10 @@ class Ranking {
       'name': 'hung',
       'color': Colors.orange,
     },
-    5: {'name': 'đại hung', 'color': Colors.deepOrange},
+    5: {
+      'name': 'đại hung',
+      'color': Colors.deepOrange,
+    },
   };
 }
 
@@ -443,3 +446,21 @@ class Elements {
     9: {'name': 'Hỏa'},
   };
 }
+
+class ContentData {
+  final String content;
+  final String contentRank;
+  final String elementName;
+  final Color? backgroundColor;
+
+  ContentData({
+    required this.content,
+    required this.contentRank,
+    required this.elementName,
+    required this.backgroundColor,
+  });
+}
+
+final Meaning meaning = Meaning();
+final Ranking ranking = Ranking();
+final Elements element = Elements();

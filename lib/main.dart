@@ -1,4 +1,5 @@
 import 'package:check_feng_shui/scaffold/mainscreenscaffold.dart';
+import 'package:check_feng_shui/scaffold/scanscreenscaffold.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,6 +28,6 @@ class MyHomePage extends StatelessWidget {
   String title;
   @override
   Widget build(BuildContext context) {
-    return MainScreenScaffold();
+    return ScanScreenScaffold();
   }
 }
