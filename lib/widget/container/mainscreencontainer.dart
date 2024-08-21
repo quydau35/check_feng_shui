@@ -1,4 +1,4 @@
-import 'package:check_feng_shui/model/data.dart';
+import 'package:check_feng_shui/features/scan_calculator/data/data.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenContainer extends StatefulWidget {
