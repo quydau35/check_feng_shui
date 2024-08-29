@@ -1,15 +1,17 @@
 import 'package:check_feng_shui/scaffold/mainscreenscaffold.dart';
 import 'package:check_feng_shui/scaffold/scanscreenscaffold.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Check phong thủy',
       theme: ThemeData(
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({required this.title});
-  String title;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return ScanScreenScaffold();

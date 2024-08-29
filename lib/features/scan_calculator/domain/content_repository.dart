@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ContentRepository {
-  String? content;
+  ContentData? contentData;
 
-  ContentData CalculateRank(String value) {
+  ContentData calculateRank(String value) {
     String content = '';
     String contentRank = '';
     Color? backgroundColor;
@@ -16,18 +16,17 @@ class ContentRepository {
     int key = (subString == "") ? 0 : int.parse(subString) % 80;
     key = (key == 0) ? 80 : key;
 
-    if (content.isNotEmpty) {
+    if (content != null) {
       content = meaning.details[key]?['detail'];
       contentRank = ranking.rank[meaning.details[key]?['rank']]?['name'];
       backgroundColor = ranking.rank[meaning.details[key]?['rank']]?['color'];
-      elementName = calculateMaterial(content);
-      // calculateMaterial();
+      elementName = calculateMaterial(value);
 
       debugPrint('content: ${content}');
       debugPrint('ranking: ${contentRank}');
       debugPrint(backgroundColor.toString());
       return ContentData(
-        content: content,
+        content: content!,
         contentRank: contentRank,
         backgroundColor: backgroundColor,
         elementName: elementName,
@@ -37,7 +36,7 @@ class ContentRepository {
       content = '';
       contentRank = '';
       return ContentData(
-        content: content,
+        content: '',
         contentRank: contentRank,
         backgroundColor: backgroundColor,
         elementName: '',
@@ -80,6 +79,11 @@ class ContentRepository {
   }
 }
 
-final Meaning meaning = Meaning();
-final Ranking ranking = Ranking();
-final Elements element = Elements();
+final contentRepositoryProvider = Provider((ref) {
+  return ContentRepository();
+});
+
+final contentProvider = StateProvider<ContentData>((ref) {
+  final contentRepository = ref.watch(contentRepositoryProvider);
+  return contentRepository.contentData!;
+});
