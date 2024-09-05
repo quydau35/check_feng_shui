@@ -1,4 +1,5 @@
 import 'package:check_feng_shui/features/scan_calculator/data/data.dart';
+import 'package:check_feng_shui/features/scan_calculator/presenter/raw_content_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,7 +21,7 @@ class ContentRepository {
       content = meaning.details[key]?['detail'];
       contentRank = ranking.rank[meaning.details[key]?['rank']]?['name'];
       backgroundColor = ranking.rank[meaning.details[key]?['rank']]?['color'];
-      elementName = calculateMaterial(value);
+      elementName = calculateMaterial(value ?? '');
 
       debugPrint('content: ${content}');
       debugPrint('ranking: ${contentRank}');
@@ -44,7 +45,7 @@ class ContentRepository {
     }
   }
 
-  calculateMaterial(content) {
+  calculateMaterial(dynamic content) {
     if (content.isNotEmpty) {
       RegExp exp = RegExp(r"[0-9]");
       Iterable<RegExpMatch> matches = exp.allMatches(content);
@@ -56,7 +57,7 @@ class ContentRepository {
       debugPrint('element: ' + element.rank[key]?['name']);
       return element.rank[key]?['name'];
     } else {
-      return null;
+      return '';
     }
   }
 
@@ -79,11 +80,17 @@ class ContentRepository {
   }
 }
 
-final contentRepositoryProvider = Provider((ref) {
-  return ContentRepository();
-});
+// final contentRepositoryProvider = Provider((ref) {
+//   return ContentRepository();
+// });
 
-final contentProvider = StateProvider<ContentData>((ref) {
-  final contentRepository = ref.watch(contentRepositoryProvider);
-  return contentRepository.contentData!;
+// final contentProvider = StateProvider<ContentData>((ref) {
+//   final contentRepository = ref.watch(contentRepositoryProvider);
+//   return contentRepository.contentData!;
+// });
+
+final contentProvider = StreamProvider.autoDispose<ContentData>((ref) async* {
+  final rawContent = ref.read(rawContentProvider);
+  final contentRepository = ContentRepository();
+  yield contentRepository.calculateRank(rawContent ?? '');
 });

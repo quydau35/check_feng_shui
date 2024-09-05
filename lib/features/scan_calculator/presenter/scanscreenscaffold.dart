@@ -3,7 +3,8 @@ import 'dart:developer';
 
 import 'package:check_feng_shui/features/scan_calculator/data/data.dart';
 import 'package:check_feng_shui/features/scan_calculator/domain/content_repository.dart';
-import 'package:check_feng_shui/widget/container/scanscreencontainer.dart';
+import 'package:check_feng_shui/features/scan_calculator/presenter/raw_content_provider.dart';
+import 'package:check_feng_shui/features/scan_calculator/presenter/scanscreencontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_scalable_ocr/flutter_scalable_ocr.dart';
@@ -15,24 +16,13 @@ class ScanScreenScaffold extends ConsumerStatefulWidget {
 
 class _ScanScreenScaffoldState extends ConsumerState<ScanScreenScaffold> {
   String text = "";
-  final StreamController<String> streamDataController =
-      StreamController<String>();
-
-  void setText(value) {
-    streamDataController.add(value);
-  }
-
-  @override
-  void dispose() {
-    streamDataController.close();
-    super.dispose();
-  }
 
   String snapshotData = '';
 
   @override
   Widget build(BuildContext context) {
-    ContentData content = ref.watch(contentProvider);
+    final AsyncValue<ContentData> content = ref.watch(contentProvider);
+    final rawContent = ref.watch(rawContentProvider);
     return Scaffold(
         appBar: AppBar(
           title: Text("Phong Thuy"),
@@ -55,23 +45,25 @@ class _ScanScreenScaffoldState extends ConsumerState<ScanScreenScaffold> {
                     inspect(value);
                   },
                   getScannedText: (value) {
-                    setText(value);
+                    Future.delayed(Duration(milliseconds: 500));
+                    ref.read(rawContentProvider.notifier).state = value;
                   }),
-              StreamBuilder<String>(
-                stream: streamDataController.stream,
-                builder:
-                    (BuildContext context, AsyncSnapshot<String> snapshot) {
-                  if (snapshot.data != null) {
-                    snapshotData = snapshot.data!;
-                    ref
-                        .read(contentRepositoryProvider)
-                        .calculateRank(snapshotData);
-                    ResultContainer(textInput: snapshot.data! ?? "");
-                  }
-                  return ResultContainer(
-                      textInput: snapshot.data != null ? snapshot.data! : "");
-                },
-              )
+              ResultContainer(),
+              // StreamBuilder<String>(
+              //   stream: rawContent,
+              //   builder:
+              //       (BuildContext context, AsyncSnapshot<String> snapshot) {
+              //     if (snapshot.data != null) {
+              //       snapshotData = snapshot.data!;
+              //       ref
+              //           .read(contentRepositoryProvider)
+              //           .calculateRank(snapshotData);
+              //       ResultContainer(textInput: snapshot.data! ?? "");
+              //     }
+              //     return ResultContainer(
+              //         textInput: snapshot.data != null ? snapshot.data! : "");
+              //   },
+              // )
             ],
           ),
         ));
