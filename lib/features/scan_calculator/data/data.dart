@@ -447,6 +447,7 @@ class Elements {
   };
 }
 
+@immutable
 class ContentData {
   final String content;
   final String contentRank;
@@ -459,6 +460,16 @@ class ContentData {
     required this.elementName,
     required this.backgroundColor,
   });
+
+  ContentData copyWith(String? content, String? contentRank,
+      String? elementName, Color? backgroundColor) {
+    return ContentData(
+      content: content ?? this.content,
+      contentRank: contentRank ?? this.contentRank,
+      elementName: elementName ?? this.elementName,
+      backgroundColor: backgroundColor,
+    );
+  }
 }
 
 final Meaning meaning = Meaning();
