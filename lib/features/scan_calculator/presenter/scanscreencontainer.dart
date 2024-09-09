@@ -1,5 +1,6 @@
 import 'package:check_feng_shui/features/scan_calculator/data/data.dart';
 import 'package:check_feng_shui/features/scan_calculator/domain/content_repository.dart';
+import 'package:check_feng_shui/features/scan_calculator/presenter/raw_content_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,6 +12,7 @@ class ResultContainer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<ContentData> content = ref.watch(contentProvider);
+    final rawContent = ref.watch(rawContentProvider);
     return content.when(
       loading: () => const CircularProgressIndicator(),
       error: (error, stackTrace) => Text('Error: $error'),
