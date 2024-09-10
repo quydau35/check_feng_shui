@@ -1,4 +1,4 @@
-import 'package:check_feng_shui/widget/container/mainscreencontainer.dart';
+import 'package:check_feng_shui/widget/container/main_screen_container.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenScaffold extends StatelessWidget {

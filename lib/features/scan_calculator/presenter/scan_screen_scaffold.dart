@@ -1,6 +1,6 @@
 import 'package:check_feng_shui/features/scan_calculator/presenter/scan_screen_container.dart';
-import 'package:check_feng_shui/scaffold/mainscreenscaffold.dart';
-import 'package:check_feng_shui/widget/container/scannercontainer.dart';
+import 'package:check_feng_shui/scaffold/main_screen_scaffold.dart';
+import 'package:check_feng_shui/widget/container/scanner_container.dart';
 import 'package:flutter/material.dart';
 
 class ScanScreenScaffold extends StatelessWidget {
