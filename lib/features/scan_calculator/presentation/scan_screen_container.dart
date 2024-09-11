@@ -1,6 +1,6 @@
 import 'package:check_feng_shui/features/scan_calculator/data/data.dart';
 import 'package:check_feng_shui/features/scan_calculator/domain/content_repository.dart';
-import 'package:check_feng_shui/features/scan_calculator/presenter/raw_content_provider.dart';
+import 'package:check_feng_shui/features/scan_calculator/presentation/raw_content_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,10 +25,10 @@ class ResultContainer extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  Text('Hành: '),
+                  const Text('Hành: '),
                   Text(
                     content.elementName ?? '',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -36,10 +36,10 @@ class ResultContainer extends ConsumerWidget {
               ),
               Row(
                 children: [
-                  Text('Ý nghĩa: '),
+                  const Text('Ý nghĩa: '),
                   Text(
                     content.contentRank ?? '',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -50,7 +50,7 @@ class ResultContainer extends ConsumerWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 softWrap: true,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),

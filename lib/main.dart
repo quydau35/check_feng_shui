@@ -1,5 +1,5 @@
 import 'package:check_feng_shui/scaffold/main_screen_scaffold.dart';
-import 'package:check_feng_shui/features/scan_calculator/presenter/scan_screen_scaffold.dart';
+import 'package:check_feng_shui/features/scan_calculator/presentation/scan_screen_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

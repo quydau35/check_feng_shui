@@ -1,11 +1,13 @@
 import 'dart:developer';
 
-import 'package:check_feng_shui/features/scan_calculator/presenter/raw_content_provider.dart';
+import 'package:check_feng_shui/features/scan_calculator/presentation/raw_content_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_scalable_ocr/flutter_scalable_ocr.dart';
 
 class ScannerContainer extends ConsumerWidget {
+  const ScannerContainer({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ScalableOCR(

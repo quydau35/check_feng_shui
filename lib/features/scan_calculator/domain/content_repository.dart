@@ -1,5 +1,5 @@
 import 'package:check_feng_shui/features/scan_calculator/data/data.dart';
-import 'package:check_feng_shui/features/scan_calculator/presenter/raw_content_provider.dart';
+import 'package:check_feng_shui/features/scan_calculator/presentation/raw_content_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,7 +13,7 @@ class ContentRepository {
     String elementName = '';
     String subString = value.substring(
         (value.length > 4) ? value.length - 4 : 0, value.length);
-    debugPrint('last 4 digits: ${subString}');
+    debugPrint('last 4 digits: $subString');
     int key = (subString == "") ? 0 : int.parse(subString) % 80;
     key = (key == 0) ? 80 : key;
 
@@ -23,11 +23,11 @@ class ContentRepository {
       backgroundColor = ranking.rank[meaning.details[key]?['rank']]?['color'];
       elementName = calculateMaterial(value ?? '');
 
-      debugPrint('content: ${content}');
-      debugPrint('ranking: ${contentRank}');
+      debugPrint('content: $content');
+      debugPrint('ranking: $contentRank');
       debugPrint(backgroundColor.toString());
       return ContentData(
-        content: content!,
+        content: content,
         contentRank: contentRank,
         backgroundColor: backgroundColor,
         elementName: elementName,
@@ -54,7 +54,7 @@ class ContentRepository {
       int key = calculateSum(
         int.parse(outputString),
       );
-      debugPrint('element: ' + element.rank[key]?['name']);
+      debugPrint('element: ${element.rank[key]?['name']}');
       return element.rank[key]?['name'];
     } else {
       return '';
