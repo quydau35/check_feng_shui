@@ -454,7 +454,7 @@ class ContentData {
   final String elementName;
   final Color? backgroundColor;
 
-  ContentData({
+  const ContentData({
     required this.content,
     required this.contentRank,
     required this.elementName,

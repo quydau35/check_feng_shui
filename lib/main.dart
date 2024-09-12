@@ -1,4 +1,3 @@
-import 'package:check_feng_shui/scaffold/main_screen_scaffold.dart';
 import 'package:check_feng_shui/features/scan_calculator/presentation/scan_screen_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +8,7 @@ void main() {
 
 class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
@@ -18,7 +17,7 @@ class MyApp extends ConsumerWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(
+      home: const MyHomePage(
         title: 'Check phong thủy',
       ),
     );
@@ -26,10 +25,10 @@ class MyApp extends ConsumerWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({required this.title});
+  const MyHomePage({super.key, required this.title});
   final String title;
   @override
   Widget build(BuildContext context) {
-    return ScanScreenScaffold();
+    return const ScanScreenScaffold();
   }
 }

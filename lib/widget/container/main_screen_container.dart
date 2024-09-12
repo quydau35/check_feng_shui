@@ -2,7 +2,7 @@ import 'package:check_feng_shui/features/scan_calculator/data/data.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenContainer extends StatefulWidget {
-  // MainScreenContainer({required Key key}) : super(key: key);
+  const MainScreenContainer({super.key});
 
   @override
   _MainScreenContainerState createState() => _MainScreenContainerState();
@@ -23,7 +23,7 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
     String subString = _conNum.text.substring(
         (_conNum.text.length > 4) ? _conNum.text.length - 4 : 0,
         _conNum.text.length);
-    debugPrint('last 4 digits: ${subString}');
+    debugPrint('last 4 digits: $subString');
     int key = (subString == "") ? 0 : int.parse(subString) % 80;
     key = (key == 0) ? 80 : key;
     setState(() {
@@ -41,8 +41,8 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
         contentRank = '';
       }
     });
-    debugPrint('content: ${content}');
-    debugPrint('ranking: ${contentRank}');
+    debugPrint('content: $content');
+    debugPrint('ranking: $contentRank');
   }
 
   calculateMaterial() {
@@ -52,7 +52,7 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
           _conNum.text.replaceAll(RegExp(r"\,|\."), ""),
         ),
       );
-      debugPrint('element: ' + element.rank[key]?['name']);
+      debugPrint('element: ${element.rank[key]?['name']}');
       // setState(() {
       //   elementName = element.rank[key]['name'];
       // });
@@ -82,133 +82,131 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Không được để trống';
-                  } else {
-                    return null;
-                  }
-                },
-                maxLines: 1,
-                decoration: InputDecoration(
-                  labelText: 'Nhập số',
-                ),
-                controller: _conNum,
-                onChanged: calculateRank,
-              ),
-            ),
-          ),
-          // RaisedButton(
-          //   child: Text(
-          //     'check',
-          //   ),
-          //   onPressed: calculateRank,
-          // ),
-          InkWell(
-            child: FutureBuilder(
-              future: futureContent,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Card(
-                    margin: const EdgeInsets.all(16.0),
-                    color: backgroundColor ?? Colors.white,
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text('Hành: '),
-                              // Text(
-                              //   elementName ?? '',
-                              //   style: TextStyle(
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text('Ý nghĩa: '),
-                              // Text(
-                              //   contentRank ?? '',
-                              //   style: TextStyle(
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                          // Text(
-                          //   content ?? '',
-                          //   overflow: TextOverflow.ellipsis,
-                          //   maxLines: 2,
-                          //   softWrap: true,
-                          //   style: TextStyle(
-                          //     fontWeight: FontWeight.bold,
-                          //   ),
-                          // ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-                if (true) {
-                  return Card(
-                    margin: const EdgeInsets.all(16.0),
-                    color: backgroundColor ?? Colors.white,
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text('Hành: '),
-                              Text(
-                                elementName ?? '',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text('Ý nghĩa: '),
-                              Text(
-                                contentRank ?? '',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            content ?? '',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            softWrap: true,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Không được để trống';
+                } else {
+                  return null;
                 }
               },
+              maxLines: 1,
+              decoration: const InputDecoration(
+                labelText: 'Nhập số',
+              ),
+              controller: _conNum,
+              onChanged: calculateRank,
             ),
-          )
-        ],
-      ),
+          ),
+        ),
+        // RaisedButton(
+        //   child: Text(
+        //     'check',
+        //   ),
+        //   onPressed: calculateRank,
+        // ),
+        InkWell(
+          child: FutureBuilder(
+            future: futureContent,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Card(
+                  margin: const EdgeInsets.all(16.0),
+                  color: backgroundColor ?? Colors.white,
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text('Hành: '),
+                            // Text(
+                            //   elementName ?? '',
+                            //   style: TextStyle(
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text('Ý nghĩa: '),
+                            // Text(
+                            //   contentRank ?? '',
+                            //   style: TextStyle(
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                        // Text(
+                        //   content ?? '',
+                        //   overflow: TextOverflow.ellipsis,
+                        //   maxLines: 2,
+                        //   softWrap: true,
+                        //   style: TextStyle(
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+              if (true) {
+                return Card(
+                  margin: const EdgeInsets.all(16.0),
+                  color: backgroundColor ?? Colors.white,
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Text('Hành: '),
+                            Text(
+                              elementName ?? '',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text('Ý nghĩa: '),
+                            Text(
+                              contentRank ?? '',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          content ?? '',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: true,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+            },
+          ),
+        )
+      ],
     );
   }
 }

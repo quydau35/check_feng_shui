@@ -4,28 +4,30 @@ import 'package:check_feng_shui/widget/container/scanner_container.dart';
 import 'package:flutter/material.dart';
 
 class ScanScreenScaffold extends StatelessWidget {
+  const ScanScreenScaffold({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Phong Thuy"),
+          title: const Text("Phong Thuy"),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              ScannerContainer(),
-              ResultContainer(),
+              const ScannerContainer(),
+              const ResultContainer(),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MainScreenScaffold(),
+                      builder: (context) => const MainScreenScaffold(),
                     ),
                   );
                 },
-                child: Text('Enter number manually'),
+                child: const Text('Enter number manually'),
               )
             ],
           ),
