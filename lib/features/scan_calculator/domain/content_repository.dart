@@ -90,7 +90,7 @@ class ContentRepository {
 // });
 
 final contentProvider = StreamProvider.autoDispose<ContentData>((ref) async* {
-  final rawContent = ref.read(rawContentProvider.notifier).state;
+  String? rawContent = ref.read(rawContentProvider);
   final contentRepository = ContentRepository();
   yield contentRepository.calculateRank(rawContent ?? '');
 });
