@@ -6,13 +6,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ContentRepository {
   ContentData? contentData;
 
+  RegExp exp = RegExp(r"[0-9]");
+
   ContentData calculateRank(String value) {
     String content = '';
     String contentRank = '';
     Color? backgroundColor;
     String elementName = '';
-    String subString = value.substring(
-        (value.length > 4) ? value.length - 4 : 0, value.length);
+    Iterable<RegExpMatch> matches = exp.allMatches(value);
+    String digitsString = matches.fold<String>(
+        '', (previousValue, element) => previousValue + element[0]!);
+    String subString = digitsString.substring(
+        (digitsString.length > 4) ? digitsString.length - 4 : 0,
+        digitsString.length);
     debugPrint('last 4 digits: $subString');
     int key = (subString == "") ? 0 : int.parse(subString) % 80;
     key = (key == 0) ? 80 : key;
@@ -21,7 +27,7 @@ class ContentRepository {
       content = meaning.details[key]?['detail'];
       contentRank = ranking.rank[meaning.details[key]?['rank']]?['name'];
       backgroundColor = ranking.rank[meaning.details[key]?['rank']]?['color'];
-      elementName = calculateMaterial(value ?? '');
+      elementName = calculateMaterial(digitsString ?? '');
 
       debugPrint('content: $content');
       debugPrint('ranking: $contentRank');
@@ -47,7 +53,6 @@ class ContentRepository {
 
   calculateMaterial(dynamic content) {
     if (content.isNotEmpty) {
-      RegExp exp = RegExp(r"[0-9]");
       Iterable<RegExpMatch> matches = exp.allMatches(content);
       String outputString = matches.fold<String>(
           '', (previousValue, element) => previousValue + element[0]!);
