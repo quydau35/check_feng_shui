@@ -8,7 +8,7 @@ class ContentRepository {
 
   RegExp exp = RegExp(r"[0-9]");
 
-  ContentData calculateRank(String value) {
+  Future<ContentData> calculateRank(String value) async {
     String content = '';
     String contentRank = '';
     Color? backgroundColor;
@@ -27,7 +27,7 @@ class ContentRepository {
       content = meaning.details[key]?['detail'];
       contentRank = ranking.rank[meaning.details[key]?['rank']]?['name'];
       backgroundColor = ranking.rank[meaning.details[key]?['rank']]?['color'];
-      elementName = calculateMaterial(digitsString ?? '');
+      elementName = await calculateMaterial(digitsString ?? '');
 
       debugPrint('content: $content');
       debugPrint('ranking: $contentRank');
@@ -51,12 +51,13 @@ class ContentRepository {
     }
   }
 
-  calculateMaterial(dynamic content) {
+  calculateMaterial(String content) async {
     if (content.isNotEmpty) {
-      Iterable<RegExpMatch> matches = exp.allMatches(content);
-      String outputString = matches.fold<String>(
-          '', (previousValue, element) => previousValue + element[0]!);
-      int key = calculateSum(
+      // Iterable<RegExpMatch> matches = exp.allMatches(content);
+      // String outputString = matches.fold<String>(
+      //     '', (previousValue, element) => previousValue + element[0]!);
+      String outputString = content.toString();
+      int key = await calculateSum(
         int.parse(outputString),
       );
       debugPrint('element: ${element.rank[key]?['name']}');
@@ -97,5 +98,5 @@ class ContentRepository {
 final contentProvider = StreamProvider.autoDispose<ContentData>((ref) async* {
   String? rawContent = ref.watch(rawContentProvider);
   final contentRepository = ContentRepository();
-  yield contentRepository.calculateRank(rawContent ?? '');
+  yield await contentRepository.calculateRank(rawContent ?? '');
 });
