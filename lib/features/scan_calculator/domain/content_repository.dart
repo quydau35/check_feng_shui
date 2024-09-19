@@ -53,9 +53,6 @@ class ContentRepository {
 
   calculateMaterial(String content) async {
     if (content.isNotEmpty) {
-      // Iterable<RegExpMatch> matches = exp.allMatches(content);
-      // String outputString = matches.fold<String>(
-      //     '', (previousValue, element) => previousValue + element[0]!);
       String outputString = content.toString();
       int key = await calculateSum(
         int.parse(outputString),
@@ -85,15 +82,6 @@ class ContentRepository {
     }
   }
 }
-
-// final contentRepositoryProvider = Provider((ref) {
-//   return ContentRepository();
-// });
-
-// final contentProvider = StateProvider<ContentData>((ref) {
-//   final contentRepository = ref.watch(contentRepositoryProvider);
-//   return contentRepository.contentData!;
-// });
 
 final contentProvider = StreamProvider.autoDispose<ContentData>((ref) async* {
   String? rawContent = ref.watch(rawContentProvider);

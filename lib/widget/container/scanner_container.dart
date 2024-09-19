@@ -24,9 +24,6 @@ class ScannerContainer extends ConsumerWidget {
           inspect(value);
         },
         getScannedText: (value) async {
-          // await Future.delayed(const Duration(milliseconds: 100), () {
-          //   ref.read(rawContentProvider.notifier).setText(value);
-          // });
           ref.read(rawContentProvider.notifier).setText(value);
         });
   }

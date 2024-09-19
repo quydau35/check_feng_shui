@@ -25,7 +25,7 @@ class ResultContainer extends ConsumerWidget {
                 children: [
                   const Text('Hành: '),
                   Text(
-                    content.elementName ?? '',
+                    content.elementName,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -36,7 +36,7 @@ class ResultContainer extends ConsumerWidget {
                 children: [
                   const Text('Ý nghĩa: '),
                   Text(
-                    content.contentRank ?? '',
+                    content.contentRank,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -44,7 +44,7 @@ class ResultContainer extends ConsumerWidget {
                 ],
               ),
               Text(
-                content.content ?? '',
+                content.content,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 softWrap: true,
