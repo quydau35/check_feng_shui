@@ -53,9 +53,6 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
         ),
       );
       debugPrint('element: ${element.rank[key]?['name']}');
-      // setState(() {
-      //   elementName = element.rank[key]['name'];
-      // });
       return element.rank[key]?['name'];
     } else {
       return null;
@@ -105,12 +102,6 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
             ),
           ),
         ),
-        // RaisedButton(
-        //   child: Text(
-        //     'check',
-        //   ),
-        //   onPressed: calculateRank,
-        // ),
         InkWell(
           child: FutureBuilder(
             future: futureContent,
@@ -126,34 +117,13 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
                         Row(
                           children: [
                             Text('Hành: '),
-                            // Text(
-                            //   elementName ?? '',
-                            //   style: TextStyle(
-                            //     fontWeight: FontWeight.bold,
-                            //   ),
-                            // ),
                           ],
                         ),
                         Row(
                           children: [
                             Text('Ý nghĩa: '),
-                            // Text(
-                            //   contentRank ?? '',
-                            //   style: TextStyle(
-                            //     fontWeight: FontWeight.bold,
-                            //   ),
-                            // ),
                           ],
                         ),
-                        // Text(
-                        //   content ?? '',
-                        //   overflow: TextOverflow.ellipsis,
-                        //   maxLines: 2,
-                        //   softWrap: true,
-                        //   style: TextStyle(
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
@@ -171,7 +141,7 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
                           children: [
                             const Text('Hành: '),
                             Text(
-                              elementName ?? '',
+                              elementName,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -182,7 +152,7 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
                           children: [
                             const Text('Ý nghĩa: '),
                             Text(
-                              contentRank ?? '',
+                              contentRank,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -190,7 +160,7 @@ class _MainScreenContainerState extends State<MainScreenContainer> {
                           ],
                         ),
                         Text(
-                          content ?? '',
+                          content,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           softWrap: true,
